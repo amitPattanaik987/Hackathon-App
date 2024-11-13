@@ -12,7 +12,7 @@ export default function Banner1() {
         if (login) {
             const newemail = localStorage.getItem("email");
 
-            fetch("http://localhost:3000/checkprime", {
+            fetch("https://hackathon-app-9hq6.onrender.com/checkprime", {
                 method: "POST",
                 headers: {
                     "Content-Type": "Application/json",
