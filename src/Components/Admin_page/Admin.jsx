@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
 import upload from "../../assets/upload.png";
@@ -11,10 +11,13 @@ export default function Admin() {
     const [imagePreview, setImagePreview] = useState(null);
     const [name, setName] = useState("");
     const [startDate, setStartDate] = useState("");
+    const [startTime, setStartTime] = useState("");  // New state for start time
     const [endDate, setEndDate] = useState("");
     const [description, setDescription] = useState("");
     const [level, setLevel] = useState("Easy");
-
+    const [city, setCity] = useState(""); // New state for Organizer City
+    const [state, setState] = useState(""); // New state for State
+    const [location, setlocation] = useState("")
     const [problemStatements, setProblemStatements] = useState(
         Array(5).fill({
             statement: "",
@@ -35,10 +38,8 @@ export default function Admin() {
         setProblemStatements(updatedStatements);
     };
 
-
     const handleCategoryChange = (index, category) => {
         const updatedStatements = [...problemStatements];
-        
         updatedStatements[index] = {
             ...updatedStatements[index],
             category: {
@@ -57,7 +58,6 @@ export default function Admin() {
     };
 
     const handleSubmit = async () => {
-        
         const filledStatements = problemStatements.filter(statement => statement.statement.trim() !== "");
         if (filledStatements.length < 5) {
             alert("Please fill in at least 5 problem statements.");
@@ -84,10 +84,19 @@ export default function Admin() {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, startDate, endDate, description, level, problemStatements: filledStatements ,responseData})
+                body: JSON.stringify({ name, startDate, startTime, endDate, city, state, description, level, problemStatements: filledStatements, responseData, location })
             }).then((res) => res.json())
                 .then((data) => {
                     setspinner(false);
+                    const email=localStorage.getItem("email");
+                    fetch("http://localhost:3000/setcreatedhackathon", {
+                        method: "POST",
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json",
+                        },
+                        body:JSON.stringify({name:name,email:email})
+                    })
                     navigate('/home');
                 }).catch(() => {
                     console.log("Internal Server Error");
@@ -126,6 +135,72 @@ export default function Admin() {
                         onChange={(e) => setEndDate(e.target.value)}
                         style={{ border: "2px solid black" }}
                     />
+                </div>
+                <div className='Start-time all'>  {/* New Time field */}
+                    <p>Start Time</p>
+                    <input
+                        type="time"
+                        onChange={(e) => setStartTime(e.target.value)}
+                        style={{ border: "2px solid black" }}
+                        className='w-[40%]'
+                    />
+                </div>
+
+                <div className='city all'>  {/* Organizer City */}
+                    <p>Organizer City</p>
+                    <input
+                        type="text"
+                        onChange={(e) => setCity(e.target.value)}
+                        style={{ border: "2px solid black" }}
+                        className='w-[40%]'
+                    />
+                </div>
+                <div className='city all'>  {/* Organizer City */}
+                    <p>Location</p>
+                    <input
+                        type="text"
+                        onChange={(e) => setlocation(e.target.value)}
+                        style={{ border: "2px solid black" }}
+                        className='w-[40%]'
+                    />
+                </div>
+                <div className=''>
+                    <p>State</p>
+                    <select
+                        onChange={(e) => setState(e.target.value)}
+                        style={{ border: "2px solid black" }}
+                    >
+                        <option value="">Select State</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+
+                    </select>
                 </div>
                 <div className='description all'>
                     <label htmlFor="description">Description:</label>
@@ -213,17 +288,12 @@ export default function Admin() {
                         </div>
                     ))}
 
-                    <button type="button" onClick={addProblemStatementField}>
-                        + Add More Problem Statement
+                    <button type="button" onClick={addProblemStatementField} className='bg-slate-300 w-[200px] p-[10px] rounded-md'>
+                        Add Problem Statement
                     </button>
                 </div>
-
-                <button
-                    type="button"
-                    className="btn btn-success success"
-                    onClick={handleSubmit}
-                >
-                    Create Challenge
+                <button onClick={handleSubmit} className="btn btn-success w-[200px]">
+                    Create Hackathon
                 </button>
             </div>
         </div>

@@ -10,13 +10,14 @@ require("dotenv").config();
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const stripe = require("stripe")(
-  "sk_test_51Pt1NCGwu7WfDqJU5XLyZyNP7kPYM4aADSWhpy5V93F5pxoQBGB8k6WqMnE7jw9EUzulZiDcxuUu2PtshWGi8Lyv00b0wuPOYx"
+  process.env.STRIPE_SECRET_KEY
 );
+const cron = require("node-cron");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET, // Click 'View API Keys' above to copy your API secret
+  api_secret: process.env.API_SECRET,
 });
 
 app.use(express.json());
@@ -24,7 +25,7 @@ app.use(cors());
 
 mongoose
   .connect(
-    "mongodb+srv://amitpattanaik987:5uzItG1hsYVYqhmB@hackathonlist.jlc98.mongodb.net/?retryWrites=true&w=majority&appName=Hackathonlist"
+    process.env.MONGO_URL
   )
   .then(() => {
     console.log("DataBase Connected");
@@ -64,10 +65,15 @@ app.post("/addhackathon", async (req, res) => {
     description: req.body.description,
     level: req.body.level,
     image: req.body.responseData,
+    state: req.body.state,
+    city: req.body.city,
+    time: req.body.startTime,
     problemStatements: req.body.problemStatements,
+    location: req.body.location,
   });
-  
+
   await newdata.save();
+  console.log("Hackathon Created");
   res.json({
     success: true,
     name: req.body.name,
@@ -109,7 +115,7 @@ app.post("/login", async (req, res) => {
     if (check.password === password) {
       const id = check.id;
       const logged_in_email = check.email;
-      const token = jwt.sign(id, "secret_token");
+      const token = jwt.sign(id, process.env.JWT_SECRET);
       res.status(200).send({
         success: true,
         token,
@@ -131,20 +137,24 @@ app.post("/login", async (req, res) => {
 
 app.post("/checkprime", async (req, res) => {
   const email = req.body.email;
-  const response = await user.findOne({ email });
-  if (response.prime_member) {
-    res.json({
-      status: true,
-    });
-  } else {
-    res.json({
-      status: false,
-    });
+  if (email) {
+    const response = await user.findOne({ email });
+    if (response && response.prime_member) {
+      res.json({
+        status: true,
+      });
+    } else {
+      res.json({
+        status: false,
+      });
+    }
   }
 });
 
 app.post("/payment", async (req, res) => {
-  const price = req.body;
+  const price = req.body.Amount;
+  const type = req.body.type;
+  const email = req.body.email;
 
   const lineitems = [
     {
@@ -153,7 +163,7 @@ app.post("/payment", async (req, res) => {
         product_data: {
           name: "Subscription Cost :",
         },
-        unit_amount: Math.round(price.Amount * 100),
+        unit_amount: Math.round(price * 100),
       },
       quantity: 1,
     },
@@ -166,6 +176,34 @@ app.post("/payment", async (req, res) => {
     cancel_url: "http://localhost:5173/cancel",
   });
 
+  if (session) {
+    if (email) {
+      const newuser = await user.findOne({ email });
+
+      if (newuser) {
+        newuser.subscribedate = new Date();
+
+        const currentDate = new Date();
+        if (type === "3month") {
+          newuser.subscription_expiry_date = new Date(
+            currentDate.setMonth(currentDate.getMonth() + 3)
+          );
+          await newuser.save();
+        } else if (type === "12month") {
+          newuser.subscription_expiry_date = new Date(
+            currentDate.setFullYear(currentDate.getFullYear() + 1)
+          );
+          await newuser.save();
+        } else {
+          return res
+            .status(400)
+            .json({ success: false, message: "Invalid plan selected" });
+        }
+      }
+    }
+  } else {
+    return res.status.json("Session Expired");
+  }
   res.json({ id: session.id });
 });
 
@@ -192,13 +230,141 @@ app.post("/getprime", async (req, res) => {
   }
 });
 
-app.post("/problems",async(req,res)=>{
-  console.log(req.body.cardclicked);
+app.post("/problems", async (req, res) => {
   const clickedcard = req.body.cardclicked;
-  const problems=await Hackathon.find({name:clickedcard});
-  console.log(problems[0].problemStatements);
-  res.send(problems[0].problemStatements);
-})
+  const problems = await Hackathon.find({ name: clickedcard });
+  if (problems) {
+    res.send(problems[0].problemStatements);
+  } else {
+    res.json("Not Found");
+  }
+});
+
+app.post("/participate", async (req, res) => {
+  const { hackathon: hackathonName, userdata } = req.body;
+
+  if (!hackathonName) {
+    return res
+      .status(400)
+      .json({ success: false, body: "Hackathon name is required" });
+  }
+
+  try {
+    const hackathon = await Hackathon.findOne({ name: hackathonName });
+
+    if (!hackathon) {
+      return res
+        .status(404)
+        .json({ success: false, body: "Hackathon not found" });
+    }
+
+    hackathon.participants.push(userdata);
+    await hackathon.save();
+
+    res
+      .status(200)
+      .json({ success: true, body: "Participant added successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, body: "Server error", error: error.message });
+  }
+});
+
+app.post("/hackathon_details", async (req, res) => {
+  const response = await Hackathon.find({ name: req.body.hackathon });
+  if (response) {
+    res.status(200).json({
+      success: true,
+      body: response,
+    });
+  } else {
+    res.status(404).json({
+      success: false,
+      body: "Hackathon not found",
+    });
+  }
+});
+
+app.post("/participated_hackathons", async (req, res) => {
+  const email = req.body.user;
+  const hackathon = req.body.hackathon;
+
+  if (hackathon) {
+    const response = await user.findOne({ email: email }); // Use `findOne` instead of `find`
+    if (response) {
+      response.participated_hackathon.push(hackathon); // Directly access the document
+      await response.save(); // Now `response` is a single document, so `save()` will work
+      res.status(200).json({
+        success: true,
+      });
+    } else {
+      res.json("User not found");
+    }
+  } else {
+    res.json("Hackathon not found");
+  }
+});
+
+app.post("/getuser", async (req, res) => {
+  const email = req.body.email;
+  if (email) {
+    const response = await user.findOne({ email });
+    if (response) {
+      res.send(response.participated_hackathon);
+    } else {
+      res.status(404).json("User Not Found");
+    }
+  } else {
+    res.status(404).json("User Not Found");
+  }
+});
+
+app.post("/setcreatedhackathon", async (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  if (email) {
+    const response = await user.findOne({ email });
+    if (response) {
+      response.created_hackathon.push(name);
+      await response.save();
+    }
+  }
+});
+
+app.post("/created_hackathon_by_you", async (req, res) => {
+  const email = req.body.email;
+  if (email) {
+    const response = await user.findOne({ email });
+    if (response) {
+      res.json(response.created_hackathon);
+    }
+  } else {
+    res.status(400).json("Didn't get Email.");
+  }
+});
+
+cron.schedule("0 0 * * *", async () => {
+  try {
+    const currentDate = new Date();
+
+    const expiredUsers = await user.find({
+      prime_member: true,
+      subscription_expiry_date: { $lt: currentDate },
+    });
+
+    for (const user of expiredUsers) {
+      user.prime_member = false;
+      user.subscribedate = null;
+      user.subscription_expiry_date = null;
+      await user.save();
+    }
+
+    console.log(`Updated ${expiredUsers.length} expired subscriptions`);
+  } catch (error) {
+    console.error("Error updating subscriptions:", error);
+  }
+});
 
 app.get("/", (req, res) => {
   res.send("API is working");

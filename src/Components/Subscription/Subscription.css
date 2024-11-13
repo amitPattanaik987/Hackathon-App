@@ -1,0 +1,129 @@
+.main1 {
+    background-image: url("../../assets/participant_bg.png");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.main1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.main1 > div {
+    position: relative;
+    z-index: 2;
+}
+
+.button:hover{
+    background-color: rgb(140, 115, 164);
+    color: beige;
+    transform: scale(1.1);
+}
+
+.button{
+    font-weight: bold;
+}
+
+@media (max-width:1493px){
+    .card-down li{
+        gap: 10px;
+        font-size: 15px;
+    }
+    .card-down p{
+        font-size: 20px;
+    }
+}
+
+@media (max-width:1200px) {
+    .card-container{
+        width: 90%;
+    }
+    .card1{
+        width: 45%;
+    }
+}
+
+@media (max-width:1300px) {
+    .heading1{
+        font-size: 35px;
+    }
+    .heading2{
+        font-size: 30px;
+    }
+}
+
+@media (max-width:1050px) {
+    .card-down{
+        gap: 10px;
+    }
+}
+@media (max-width:1020px) {
+    .card-down ul li{
+        font-size: 18px;
+    }
+}
+@media (max-width:970px) {
+    .card-down p{
+        font-size: 18px;
+    }
+}
+@media (max-width:820px) {
+    .heading1{
+        font-size: 30px;
+    }
+    .heading2{
+        font-size: 25px;
+    }
+}
+@media (max-width:700px) {
+    .button{
+        width: 200px;
+    }
+}
+
+@media (min-width:610px){
+    .main1{
+        align-items: center;
+    }
+    .card-down{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}
+
+@media (max-width:634px){
+    .card-down{
+        padding: 2px !important;
+        gap: 5px;
+    }
+}
+
+@media (max-width:610px){
+    .card-container{
+        display: flex;
+        flex-direction: column;
+        gap: 5vw;
+        height: auto;
+        padding: 50px 0px;
+    }
+    .main1{
+        height: auto;
+    }
+    .card1{
+        width: 70%;
+    }
+} 
+
+@media (max-width:368px){
+    .button{
+        width: 100%;
+    }
+}

@@ -1,0 +1,110 @@
+.big-container {
+    position: relative;
+    background-image: url("../../assets/participant_bg.png");
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.big-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.form-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.form-container label {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 5px;
+    padding: 8px 10px;
+    height: 40px;
+}
+
+.form-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    justify-content: center;
+}
+
+.form-container .btn {
+    width: 100%;
+    max-width: 200px;
+}
+
+@media (max-width: 768px) {
+    .big-container {
+        padding: 10px;
+    }
+
+    .form-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .form-container input,
+    .form-container select {
+        width: 100%;
+    }
+
+    .form-container div {
+        align-items: center;
+        gap: 15px;
+    }
+
+    .form-container label {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-container {
+        padding: 10px;
+    }
+
+    .form-container input,
+    .form-container select {
+        width: 100%;
+        max-width: 100%;
+        font-size: 0.9rem;
+        height: 35px;
+    }
+
+    .form-container label {
+        font-size: 12px;
+    }
+}

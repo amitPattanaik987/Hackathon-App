@@ -17,6 +17,7 @@ export default function Success() {
             body: JSON.stringify(updatedData),
         })
     }, [])
+    
     return (
         <div className="flex justify-center min-h-screen items-center bg-gradient-to-r from-white to-green-700">
             <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md text-center">

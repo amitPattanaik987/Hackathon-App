@@ -6,27 +6,33 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Banner1() {
     const navigate = useNavigate();
-    
-    const CreateChallenge = () => {
-        const newemail = localStorage.getItem("email");
 
-        fetch("http://localhost:3000/checkprime", {
-            method: "POST",
-            headers: {
-                "Content-Type": "Application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({ email: newemail })
-        }).then(response => response.json())
-            .then(data => {
-                if (data.status) {
-                    navigate("/admin");
-                }
-                else {
-                    alert("Only Prime Members Allowed");
-                }
-            })
-            .catch(error => console.error('Error:', error));
+    const CreateChallenge = () => {
+        const login = localStorage.getItem("token");
+        if (login) {
+            const newemail = localStorage.getItem("email");
+
+            fetch("http://localhost:3000/checkprime", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "Application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({ email: newemail })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        navigate("/admin");
+                    }
+                    else {
+                        alert("Only Prime Members Allowed");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        else{
+            alert("SIGN IN TO CREATE ANY HACKATHON ....")
+        }
     }
     return (
         <div className='main'>

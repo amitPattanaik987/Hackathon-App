@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Create_card.css";
 import tick from "../../assets/tick_symbol.png";
 import Countdown_timer from '../countdown_timer/Countdown_timer';
@@ -60,9 +60,29 @@ export default function Create_card(props) {
   const statusStyles = getStatusStyles();
 
   const handleParticipateClick = () => {
-    // Navigate to the Problem_statements page with the hackathon name as a parameter
-    navigate(`/problem/${props.name}`);
+    const login = localStorage.getItem("token");
+    if (login) {
+      navigate(`/problem/${props.name}`);
+    }
+    else{
+      alert("SIGN IN TO JOIN IN THE HACKATHON ..");
+    }
   };
+  const [participated_hackathons, setparticipated_hackathons] = useState([])
+  const email = localStorage.getItem("email");
+  useEffect(() => {
+    fetch("http://localhost:3000/getuser", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ email })
+    }).then((response) => response.json()).then((data) => {
+      setparticipated_hackathons(data);
+    });
+  }, [])
+
 
   return (
     <div className='card'>
@@ -77,10 +97,15 @@ export default function Create_card(props) {
           <Countdown_timer targetDate={props.endDate} />
         )}
 
-        <button className='btn btn-success participate' onClick={handleParticipateClick}>
-          <img src={tick} alt="" />
-          <p>Participate Now</p>
-        </button>
+        {
+          participated_hackathons.includes(props.name) ? <div className=''><p className='p-[10px] bg-slate-200 rounded-[10px]'>Joined</p></div> :
+            <div>{props.status !== 'Past' && (
+              <button className='btn btn-success participate' onClick={handleParticipateClick}>
+                <img src={tick} alt="" />
+                <p>Participate Now</p>
+              </button>
+            )}</div>
+        }
       </div>
     </div>
   );

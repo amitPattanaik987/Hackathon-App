@@ -32,11 +32,6 @@
   border-bottom-right-radius: 0;
 }
 
-/* @media (max-height:800px) {
-  .card img{
-    height: 500vh;
-  }
-} */
 .participate img {
   width: 20px;
   height: 20px;
@@ -47,7 +42,7 @@
 }
 
 .participate {
-  width: 70%;
+  width: 100%;
   display: flex;
   gap: 10px;
   align-items: center;
@@ -70,6 +65,7 @@
     font-size: 12px;
   }
 }
+
 @media (max-width:320px) {
   .participate p{
     font-size: 9px;

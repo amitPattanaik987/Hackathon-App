@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Problems.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Problems({ hackathon_name }) {
 
   const [collecteddata, setcollecteddata] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:3000/problems", {
@@ -28,6 +30,12 @@ export default function Problems({ hackathon_name }) {
         console.error("There was a problem with the fetch operation:", error);
       });
   }, [hackathon_name]);
+
+  const handleParticipate = () => {
+    const encodedHackathonName = encodeURIComponent(hackathon_name);
+    navigate(`/problem/${encodedHackathonName}/participation`);
+
+  };
 
   return (
     <div>
@@ -56,8 +64,10 @@ export default function Problems({ hackathon_name }) {
           </tbody>
         </table>
       </div>
-      <div className='p-[30px]'>
-        <button className='btn btn-success float-right w-[200px]'>Participate</button>
+      <div className='pb-[50px] pr-[50px]'>
+        <button className='btn btn-success float-right w-[200px]' onClick={handleParticipate}>
+          Participate
+        </button>
       </div>
     </div>
   );

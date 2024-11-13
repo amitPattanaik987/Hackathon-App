@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { type } = require("os");
 const userschema = new mongoose.Schema({
   name: {
     type: String,
@@ -17,6 +16,18 @@ const userschema = new mongoose.Schema({
   prime_member:{
     type:Boolean,
     default:false
+  },
+  participated_hackathon:{
+    type:[String],
+  },
+  created_hackathon:{
+    type:[String],
+  },
+  subscribedate:{
+    type:Date,
+  },
+  subscription_expiry_date:{
+    type:Date,
   }
 });
 
