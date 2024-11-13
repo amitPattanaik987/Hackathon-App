@@ -18,7 +18,7 @@ export default function Subscription() {
 
         const body = { Amount: e.target.value , type :type , email:email};
         const headers = { "Content-Type": "application/json" };
-        const response = await fetch("http://localhost:3000/payment", {
+        const response = await fetch("https://hackathon-app-9hq6.onrender.com/payment", {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)
