@@ -9,7 +9,7 @@ export default function Success() {
         const updatedData = {
             email: data
         }
-        fetch("http://localhost:3000/setsubscribed", {
+        fetch("https://hackathon-app-9hq6.onrender.com/setsubscribed", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
