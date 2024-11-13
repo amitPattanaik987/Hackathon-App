@@ -1,12 +1,3 @@
-# Node modules
+.env
 node_modules/
 
-# .env file containing sensitive data
-*.env
-
-# Logs
-logs/
-*.log
-
-# Other files or folders you want to ignore
-.DS_Store
