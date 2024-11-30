@@ -68,7 +68,7 @@ export default function Admin() {
         let formData = new FormData();
         formData.append("image", image);
         setspinner(true);
-        await fetch("https://hackathon-app-9hq6.onrender.com/image_upload", {
+        await fetch("https://hackathon-app-2-wfdy.onrender.com/image_upload", {
             method: "POST",
             headers: {
                 Accept: "application/json"
@@ -78,7 +78,7 @@ export default function Admin() {
             .then((data) => { responseData = data; });
 
         if (responseData) {
-            await fetch("https://hackathon-app-9hq6.onrender.com/addhackathon", {
+            await fetch("https://hackathon-app-2-wfdy.onrender.com/addhackathon", {
                 method: "POST",
                 headers: {
                     Accept: "application/json",
@@ -89,7 +89,7 @@ export default function Admin() {
                 .then((data) => {
                     setspinner(false);
                     const email=localStorage.getItem("email");
-                    fetch("https://hackathon-app-9hq6.onrender.com/setcreatedhackathon", {
+                    fetch("https://hackathon-app-2-wfdy.onrender.com/setcreatedhackathon", {
                         method: "POST",
                         headers: {
                             "Accept": "application/json",
