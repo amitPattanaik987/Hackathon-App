@@ -8,7 +8,7 @@ export default function Problems({ hackathon_name }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://hackathon-app-2-wfdy.onrender.com/problems", {
+    fetch("https://hackathon-app-9hq6.onrender.com/problems", {
       method: "POST",
       headers: {
         "Accept": "application/json",
