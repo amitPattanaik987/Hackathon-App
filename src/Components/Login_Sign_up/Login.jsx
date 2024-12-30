@@ -31,7 +31,7 @@ export default function Login() {
             return;
         }
 
-        fetch("https://hackathon-app-2-wfdy.onrender.com/signup", {
+        fetch("https://hackathon-app-9hq6.onrender.com/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export default function Login() {
             return;
         }
 
-        fetch("https://hackathon-app-2-wfdy.onrender.com/login", {
+        fetch("https://hackathon-app-9hq6.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
