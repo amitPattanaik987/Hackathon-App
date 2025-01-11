@@ -43,7 +43,7 @@ export default function Navbar() {
       setlogin(false);
     }
     const email = localStorage.getItem("email");
-    fetch("https://hackathon-app-9hq6.onrender.com/getuser", {
+    fetch("https://hackathon-app-2-wfdy.onrender.com/getuser", {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -76,7 +76,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    fetch("https://hackathon-app-9hq6.onrender.com/getprime", {
+    fetch("https://hackathon-app-2-wfdy.onrender.com/getprime", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -98,7 +98,7 @@ export default function Navbar() {
   const CreateChallenge = () => {
     const newemail = localStorage.getItem("email");
 
-    fetch("https://hackathon-app-9hq6.onrender.com/checkprime", {
+    fetch("https://hackathon-app-2-wfdy.onrender.com/checkprime", {
       method: "POST",
       headers: {
         "Content-Type": "Application/json",
@@ -138,7 +138,7 @@ export default function Navbar() {
 
     const email = localStorage.getItem("email");
     if (email) {
-      fetch("https://hackathon-app-9hq6.onrender.com/created_hackathon_by_you", {
+      fetch("https://hackathon-app-2-wfdy.onrender.com/created_hackathon_by_you", {
         method: "POST",
         headers: {
           "Accept": "application/json",
