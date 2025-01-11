@@ -8,7 +8,7 @@ function Participate() {
     const hackathon = path.hackathon_name;
 
     useEffect(() => {
-        fetch("https://hackathon-app-9hq6.onrender.com/hackathon_details", {
+        fetch("https://hackathon-app-2-wfdy.onrender.com/hackathon_details", {
             method: "POST",
             headers: {
                 "Accept": "application/json",
