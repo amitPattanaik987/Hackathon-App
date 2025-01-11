@@ -71,7 +71,7 @@ export default function Create_card(props) {
   const [participated_hackathons, setparticipated_hackathons] = useState([])
   const email = localStorage.getItem("email");
   useEffect(() => {
-    fetch("https://hackathon-app-9hq6.onrender.com/getuser", {
+    fetch("https://hackathon-app-2-wfdy.onrender.com/getuser", {
       method: "POST",
       headers: {
         "Accept": "application/json",
