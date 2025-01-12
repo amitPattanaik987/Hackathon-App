@@ -1,0 +1,178 @@
+.search {
+  background-color: #002a3b;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  gap: 30px;
+  margin-top: 10px;
+  padding: 20px ;
+}
+
+.search input {
+  height: 50px;
+  width: 60%;
+  border-radius: 12px;
+  padding-left: 10px;
+  border: none;
+}
+
+.header {
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.arrow-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.filter-btn {
+  height: 50px;
+  width: 110px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.search-second {
+  display: flex;
+  gap: 50px;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+  padding: 0px 40px;
+}
+
+.filter {
+  position: absolute;
+  top: 45px;
+  right: 40px;
+  z-index: 100;
+  color: black;
+  background-color: white;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 10px;
+}
+.filter2{
+  margin-top: 10px;
+}
+@media (max-width: 990px){
+  .active-filter {
+    width: 200px !important; 
+  }
+  .filter{
+    width: 200px;
+  }
+}
+@media (max-width: 750px){
+  .active-filter {
+    width: 150px !important; 
+  }
+  .filter{
+    width: 150px;
+  }
+}
+@media (max-width: 600px){
+  .active-filter {
+    width: 100px !important; 
+  }
+  .filter{
+    width: 100px;
+  }
+  .filter input{
+    width: 10px !important;
+    height: 10px !important;
+  }
+  .menu-item{
+    gap: 5px !important;
+  }
+  .menu-item p{
+    font-size: 14px;
+  }
+}
+
+@media (max-width:400px) {
+  .search .header{
+    padding: 20px 30px;
+  }
+}
+.rotate {
+  transform: rotate(180deg);
+  transition: 0.3s;
+}
+
+.active-filter {
+  width: 300px;
+}
+
+.filter input {
+  width: 20px;
+  height: 20px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  gap: 10px;
+}
+
+.menu-item p {
+  margin: 0;
+}
+
+.filter1 {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter p {
+  color: #666666;
+}
+
+.applied-filter {
+  display: flex;
+  gap: 40px;
+  width: 70%;
+}
+
+.applied-filter-inner {
+  background-color: #f8f9fd7d;
+  padding: 5px 10px;
+  border-radius: 30px;
+}
+
+@media (max-width: 500px) {
+  .search .header {
+    padding: 20px 30px;
+  }
+
+  .search-second {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 410px) {
+  .search .header {
+    padding: 20px 20px;
+  }
+  .search-second{
+    padding: 0px 20px ;
+  }
+  .filter{
+    right: 20px;
+  }
+}

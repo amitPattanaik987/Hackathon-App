@@ -1,0 +1,95 @@
+/* Default styles */
+.header {
+    padding: 20px 80px;
+}
+.form {
+    padding: 10px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.form p {
+    margin: 0;
+}
+.all {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.all input {
+    border-radius: 5px;
+    padding: 10px;
+}
+.name input {
+    width: 25%;
+}
+.Start-date input {
+    width: 30%;
+}
+.end-date {
+    width: 30%;
+}
+.description textarea {
+    width: 50%;
+}
+.image label {
+    border: 1px solid gray;
+    width: 20%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+}
+.drop-down select {
+    border-radius: 5px;
+    width: 20%;
+    padding: 10px;
+}
+.success {
+    width: 20%;
+}
+
+/* Responsive styles for screen width less than 1000px */
+@media (max-width: 1000px) {
+    .form {
+        padding: 10px 20px;
+    }
+
+    .all input,
+    .name input,
+    .Start-date input,
+    .end-date input,
+    .description textarea,
+    .drop-down select,
+    .image label {
+        width: 100%; /* Adjust inputs to take full width */
+    }
+
+    .description textarea {
+        width: 100%;
+        max-width: 100%; /* Ensures textarea doesn't overflow */
+    }
+}
+
+@media (max-width:700px) {
+    .problem-section{
+        gap: 0.5rem;
+    }
+    .category-checkbox{
+        gap: 10px !important;
+    }
+    .category-checkbox label p{
+        font-size: 12px;
+    }
+    .all input{
+        padding: 4px;
+    }
+}
+
+@media (max-width:450px) {
+    .header{
+        padding: 10px 40px;
+    }
+}

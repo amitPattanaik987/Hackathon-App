@@ -1,0 +1,56 @@
+.banner {
+    background-image: url("https://www.sih.gov.in/img/problem-statement-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.banner h1 {
+    font-weight: 800;
+    font-size: 70px;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.problems-container {
+    overflow-x: auto;
+    margin: 20px auto;
+    padding-bottom: 20px;
+    max-width: 100%;
+}
+
+.problems-table {
+    width: 100%;
+    min-width: 800px; 
+    border-collapse: collapse;
+    margin: 0 auto; 
+}
+
+.problems-table th, .problems-table td {
+    padding: 8px 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+}
+
+.problems-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.problems-table td {
+    vertical-align: top;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+@media (max-width: 768px) {
+    .problems-table {
+        font-size: 12px;
+    }
+}
