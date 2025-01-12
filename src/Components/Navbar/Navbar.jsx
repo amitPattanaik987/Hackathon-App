@@ -18,12 +18,7 @@ export default function Navbar() {
   const [created_hackathons, setcreated_hackathons] = useState([]);
 
   const homeclicked = () => {
-    if (localStorage.getItem("token")) {
       navigate("/");
-      window.location.reload();
-    } else {
-      alert("User Authentication Required");
-      location.reload();
     }
   };
 
