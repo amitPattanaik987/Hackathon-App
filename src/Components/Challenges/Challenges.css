@@ -1,6 +1,6 @@
 .challenges {
   width: 100%;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +19,7 @@
 .challenges-under {
   padding: 20px;
   width: 80%;
-  height: 80vh;
+  height: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 50px;
@@ -27,11 +27,11 @@
 
 @media (max-width:1280px) {
   .challenges{
-    padding: 0px;
+    padding:40px 0px;
     gap: 10px;
   }
   .challenges-under{
-    padding: 0px;
+    padding:0px;
     gap: 20px;
   }
 }
@@ -41,7 +41,6 @@
     padding: 10px 50px;
   }
   .challenges-under{
-    padding: 0px;
     gap: 20px;
   }
 }

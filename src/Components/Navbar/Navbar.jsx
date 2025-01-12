@@ -19,7 +19,7 @@ export default function Navbar() {
 
   const homeclicked = () => {
     if (localStorage.getItem("token")) {
-      navigate("/home");
+      navigate("/");
       window.location.reload();
     } else {
       alert("User Authentication Required");
@@ -56,7 +56,7 @@ export default function Navbar() {
   }, []);
 
   const loginclicked = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   const logoutclicked = () => {
@@ -66,11 +66,11 @@ export default function Navbar() {
   };
 
   const makepayment = async () => {
-    const login=localStorage.getItem("token");
-    if(login){
+    const login = localStorage.getItem("token");
+    if (login) {
       navigate("/subscription")
     }
-    else{
+    else {
       alert("PLEASE LOGIN FIRST TO ENJOY PREMIUM..")
     }
   };
@@ -92,28 +92,39 @@ export default function Navbar() {
   }, []);
 
   const hackathon_joined_clicked = () => {
-    setpopup(true);
+    const email = localStorage.getItem("email");
+    if(email){
+      setpopup(true);
+    }
+    else{
+      alert("Login First Please..")
+    }
   };
 
   const CreateChallenge = () => {
     const newemail = localStorage.getItem("email");
 
-    fetch("http://localhost:3000/checkprime", {
-      method: "POST",
-      headers: {
-        "Content-Type": "Application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({ email: newemail })
-    }).then(response => response.json())
-      .then(data => {
-        if (data.status) {
-          navigate("/admin");
-        } else {
-          alert("Only Prime Members Allowed");
-        }
-      })
-      .catch(error => console.error('Error:', error));
+    if (newemail) {
+      fetch("http://localhost:3000/checkprime", {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ email: newemail })
+      }).then(response => response.json())
+        .then(data => {
+          if (data.status) {
+            navigate("/admin");
+          } else {
+            alert("Only Prime Members Allowed");
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    else{
+      alert("Please Login First to Enjoy the features..")
+    }
   };
 
   useEffect(() => {
@@ -134,10 +145,12 @@ export default function Navbar() {
   }
 
   const created_clicked_clicked = () => {
-    setpopup2(true);
+    
 
     const email = localStorage.getItem("email");
+    
     if (email) {
+      setpopup2(true);
       fetch("http://localhost:3000/created_hackathon_by_you", {
         method: "POST",
         headers: {
@@ -154,12 +167,12 @@ export default function Navbar() {
     }
   }
 
-  const contactclicked =()=>{
-    const Login=localStorage.getItem("tokrn");
-    if(login){
+  const contactclicked = () => {
+    const Login = localStorage.getItem("tokrn");
+    if (login) {
       navigate("/contact")
     }
-    else{
+    else {
       alert("SIGN IN TO CONTACT US .....")
     }
   }

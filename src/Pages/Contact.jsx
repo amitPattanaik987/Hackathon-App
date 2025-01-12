@@ -29,7 +29,7 @@ const ContactUs = () => {
                 </div>
 
                 <div className="mt-6 text-center">
-                    <button className="bg-gradient-to-r from-green-400 to-yellow-500 text-white py-2 px-6 rounded-full hover:bg-gradient-to-l hover:from-yellow-500 hover:to-green-400 transition duration-300" onClick={() =>navigate("/home")}>
+                    <button className="bg-gradient-to-r from-green-400 to-yellow-500 text-white py-2 px-6 rounded-full hover:bg-gradient-to-l hover:from-yellow-500 hover:to-green-400 transition duration-300" onClick={() =>navigate("/")}>
                         Get in Touch
                     </button>
                 </div>

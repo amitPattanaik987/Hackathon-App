@@ -273,7 +273,7 @@ export default function Admin() {
                                         checked={problem.category.software}
                                         onChange={() => handleCategoryChange(index, "software")}
                                     />
-                                    Software
+                                    <p>Software</p>
                                 </label>
                                 <label>
                                     <input
@@ -281,7 +281,7 @@ export default function Admin() {
                                         checked={problem.category.hardware}
                                         onChange={() => handleCategoryChange(index, "hardware")}
                                     />
-                                    Hardware
+                                    <p>Hardware</p>
                                 </label>
                             </div>
 

@@ -73,7 +73,7 @@ export default function Login() {
                     const newemail = data.logged_in_email;
                     localStorage.setItem("token", token);
                     localStorage.setItem("email", newemail);
-                    navigate("/home")
+                    navigate("/")
                     location.reload();
                 }
                 else {

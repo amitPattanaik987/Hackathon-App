@@ -52,7 +52,7 @@ function About() {
             </div>
 
             <div className="flex justify-center mt-8">
-                <button className="bg-gradient-to-r from-green-400 to-yellow-500 text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-gradient-to-l hover:from-yellow-500 hover:to-green-400 transition duration-300" onClick={()=>navigate("/home")}>
+                <button className="bg-gradient-to-r from-green-400 to-yellow-500 text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-gradient-to-l hover:from-yellow-500 hover:to-green-400 transition duration-300" onClick={()=>navigate("/")}>
                     Join Us Now!
                 </button>
             </div>

@@ -21,9 +21,9 @@ export default function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Login />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/admin' element={<Adminmain />} />
-          <Route path='/home' element={<List_page />} />
+          <Route path='/' element={<List_page />} />
           <Route path='/problem' element={<Problem_statements />} />
           <Route path='/problem/:hackathon_name' element={<Problem_statements />} />
           <Route path='/problem/:hackathon_name/participation/participate' element={<Participate />} />
