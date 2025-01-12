@@ -65,7 +65,7 @@ function Participation_form() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Form Data Submitted: ", formData);
-        fetch("http://localhost:3000/participate", {
+        fetch("https://hackathon-app-2-wfdy.onrender.com/participate", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -75,7 +75,7 @@ function Participation_form() {
         }).then((response) => response.json()).then((data) => {
             if (data.success) {
                 const login_email = localStorage.getItem("email");
-                fetch("http://localhost:3000/participated_hackathons", {
+                fetch("https://hackathon-app-2-wfdy.onrender.com/participated_hackathons", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

@@ -43,7 +43,7 @@ export default function Navbar() {
       setlogin(false);
     }
     const email = localStorage.getItem("email");
-    fetch("http://localhost:3000/getuser", {
+    fetch("https://hackathon-app-2-wfdy.onrender.com/getuser", {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -76,7 +76,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/getprime", {
+    fetch("https://hackathon-app-2-wfdy.onrender.com/getprime", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -93,10 +93,10 @@ export default function Navbar() {
 
   const hackathon_joined_clicked = () => {
     const email = localStorage.getItem("email");
-    if(email){
+    if (email) {
       setpopup(true);
     }
-    else{
+    else {
       alert("Login First Please..")
     }
   };
@@ -122,7 +122,7 @@ export default function Navbar() {
         })
         .catch(error => console.error('Error:', error));
     }
-    else{
+    else {
       alert("Please Login First to Enjoy the features..")
     }
   };
@@ -145,10 +145,10 @@ export default function Navbar() {
   }
 
   const created_clicked_clicked = () => {
-    
+
 
     const email = localStorage.getItem("email");
-    
+
     if (email) {
       setpopup2(true);
       fetch("http://localhost:3000/created_hackathon_by_you", {

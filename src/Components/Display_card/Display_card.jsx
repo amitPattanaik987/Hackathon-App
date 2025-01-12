@@ -7,7 +7,7 @@ export default function Display_card({ filterClick }) {
     const { hackathons, searchQuery, filters, setHackathons } = useFormContext();
 
     useEffect(() => {
-        fetch("http://localhost:3000/gethackathons")
+        fetch("https://hackathon-app-2-wfdy.onrender.com/gethackathons")
             .then((res) => res.json())
             .then((data) => {
                 setHackathons(data);
