@@ -151,7 +151,7 @@ export default function Navbar() {
 
     if (email) {
       setpopup2(true);
-      fetch("http://localhost:3000/created_hackathon_by_you", {
+      fetch("https://hackathon-app-2-wfdy.onrender.com/created_hackathon_by_you", {
         method: "POST",
         headers: {
           "Accept": "application/json",
