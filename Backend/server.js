@@ -21,9 +21,7 @@ cloudinary.config({
 });
 
 app.use(express.json());
-app.use(cors({
-    origin: 'https://hackathon-app-three.vercel.app'
-}));
+app.use(cors());
 
 mongoose
   .connect(
